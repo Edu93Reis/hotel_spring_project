@@ -1,7 +1,11 @@
 package br.com.hotelproject.hotelproject.model.service.impl;
 
-import org.springframework.stereotype.Service;
+import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.com.hotelproject.hotelproject.exceptions.AutenticacaoException;
 import br.com.hotelproject.hotelproject.exceptions.EmailJaCadastradoException;
 import br.com.hotelproject.hotelproject.model.entity.Usuario;
 import br.com.hotelproject.hotelproject.model.repository.UsuarioRepository;
@@ -19,30 +23,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario autenticarUsuario(String email, String senha) {
-		Usuario user = null;
-		try {
-			if(usuarioRepository.existsByEmailAndSenha(email, senha)) {
-				user = new Usuario();
-				user = usuarioRepository.findByEmailAndSenha(email, senha);
-			}
-		}catch(Throwable e) {
-			e.printStackTrace();
+		Optional<Usuario> user = usuarioRepository.findByEmail(email);
+		
+		if(!user.isPresent()) {
+			throw new AutenticacaoException("E-mail inválido!");
 		}
 		
-		return user;
+		if(!user.get().getSenha().equals(senha)) {
+			throw new AutenticacaoException("Senha Inválida!");
+		}
+		
+		return user.get();
 	}
 
 	@Override
-	public void cadastraUsuario(Usuario usuario) {
+	@Transactional
+	public Usuario cadastraUsuario(Usuario usuario) {
 		
-		try {
-			validaEmail(usuario.getEmail());
+		validaEmail(usuario.getEmail());
 			
-			usuarioRepository.save(usuario);
-			
-		}catch(Throwable e) {
-			e.getMessage();
-		}
+		return usuarioRepository.save(usuario);
 		
 	}
 

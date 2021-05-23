@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.com.hotelproject.hotelproject.model.entity.Usuario;
 
 @SpringBootTest
- @RunWith( SpringRunner.class)
+@RunWith( SpringRunner.class)
 public class UsuarioRepositoryTest {
 	
 	@Autowired
@@ -27,26 +27,26 @@ public class UsuarioRepositoryTest {
 		
 	}
 	
-	@Test
-	public void testaCadastroUsuario() {
-		
-		Usuario usuario = new Usuario(null, "John Doe", "user@test.com", "user", 120);
-		
-		Usuario teste = usuarioRepository.save(usuario);
-		
-		Assertions.assertThat(teste).asList();
-		
-	}
-	
-	@Test
-	public void testaAutenticacaoUsuario() {
-		
-		Usuario usuario = new Usuario("user@test.com", "user");
-		
-		Usuario teste = usuarioRepository.save(usuario);
-		
-		Assertions.assertThat(teste).asList();
-		
-	}
+//	@Test
+//	public void testaCadastroUsuario() {
+//		
+//		Usuario usuario = new Usuario("John Doe", "user@test.com", "user", 120);
+//		
+//		Usuario teste = usuarioRepository.save(usuario);
+//		
+//		Assertions.assertThat(teste).asList();
+//		
+//	}
+//	
+//	@Test
+//	public void testaAutenticacaoUsuario() {
+//		
+//		Usuario usuario = new Usuario("user@test.com", "user");
+//		
+//		Usuario teste = usuarioRepository.save(usuario);
+//		
+//		Assertions.assertThat(teste).asList();
+//		
+//	}
 
 }

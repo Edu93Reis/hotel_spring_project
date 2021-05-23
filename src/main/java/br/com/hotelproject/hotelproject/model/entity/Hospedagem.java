@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 @Entity
-@Table(name="Hospedagem",schema="Financas")
+@Table(name="Hospedagem",schema="hotel")
 public class Hospedagem {
 
 	@Id
@@ -31,11 +31,11 @@ public class Hospedagem {
 	@Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
 	private LocalDate dataHospedagemFim;
 	
-	@OneToMany
+//	@OneToMany
 	@JoinColumn(name = "email")
 	private String email;
 	
-	@OneToOne
+//	@OneToOne
 	@JoinColumn(name = "idQuarto")
 	private Long idQuarto;
 

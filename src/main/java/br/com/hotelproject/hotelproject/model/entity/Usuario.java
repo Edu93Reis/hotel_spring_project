@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Usuario", schema = "financas")
+@Table(name = "Usuario", schema = "hotel")
 public class Usuario {
 
 	@Id
@@ -26,6 +26,14 @@ public class Usuario {
 	public Usuario(Long idUsuario, String nome, String email, String senha, Integer idade) {
 		super();
 		this.idUsuario = idUsuario;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.idade = idade;
+	}
+	
+	public Usuario(String nome, String email, String senha, Integer idade) {
+		super();
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
