@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.hotelproject.hotelproject.model.enums.StatusQuarto;
+
 @Entity
 @Table(name = "Suite", schema="hotel")
 public class Suite {

@@ -31,6 +31,12 @@ public class Usuario {
 		this.senha = senha;
 		this.idade = idade;
 	}
+	
+	public Usuario(String email, String senha) {
+		super();
+		this.email = email;
+		this.senha = senha;
+	}
 
 	public Long getIdUsuario() {
 		return idUsuario;
