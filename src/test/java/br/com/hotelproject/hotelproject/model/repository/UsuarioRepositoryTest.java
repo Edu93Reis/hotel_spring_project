@@ -1,5 +1,7 @@
 package br.com.hotelproject.hotelproject.model.repository;
 
+import java.util.Optional;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +28,9 @@ public class UsuarioRepositoryTest {
 	TestEntityManager entityManager;
 	
 	@Test
-	public void testaValidacaoEmail() {
+	public void testaValidacaoEmailTrue() {
 		
-		Usuario usuario = new Usuario("user@test.com","user");
+		Usuario usuario = criarUsuario();
 		
 		entityManager.persist(usuario);
 		
@@ -39,9 +41,22 @@ public class UsuarioRepositoryTest {
 	}
 	
 	@Test
+	public void testaValidacaoEmailFalse() {
+		
+		boolean valida = usuarioRepository.existsByEmail("teste@any.com");
+		
+		Assertions.assertThat(valida).isFalse();
+		
+	}
+	
+	public Usuario criarUsuario() {
+		return new Usuario("John Doe", "user@test.com", "user", 120);
+	}
+	
+	@Test
 	public void testaCadastroUsuario() {
 		
-		Usuario usuario = new Usuario("John Doe", "user@test.com", "user", 120);
+		Usuario usuario = criarUsuario();
 		
 		Usuario teste = usuarioRepository.save(usuario);
 		
@@ -49,15 +64,23 @@ public class UsuarioRepositoryTest {
 		
 	}
 	
-//	@Test
-//	public void testaAutenticacaoUsuario() {
-//		
-//		Usuario usuario = new Usuario("user@test.com", "user");
-//		
-//		Usuario teste = entityManager.persist(usuario);
-//		
-//		Assertions.assertThat(teste).asList();
-//		
-//	}
-
+	public void buscaUsuarioPorEmailTrue() {
+		
+		Usuario usuario = criarUsuario();
+		entityManager.persist(usuario);
+		
+		Optional<Usuario> result = usuarioRepository.findByEmail(usuario.getEmail());
+		
+		Assertions.assertThat(result.isPresent()).isTrue();
+		
+	}
+	
+	public void buscaUsuarioPorEmailFalse() {
+		
+		Optional<Usuario> result = usuarioRepository.findByEmail("teste@any.com");
+		
+		Assertions.assertThat(result.isPresent()).isFalse();
+		
+	}
+	
 }

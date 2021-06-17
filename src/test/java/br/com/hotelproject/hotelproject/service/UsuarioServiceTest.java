@@ -3,7 +3,9 @@ package br.com.hotelproject.hotelproject.service;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.hotelproject.hotelproject.exceptions.AutenticacaoException;
@@ -13,6 +15,8 @@ import br.com.hotelproject.hotelproject.model.repository.UsuarioRepository;
 import br.com.hotelproject.hotelproject.model.service.UsuarioService;
 
 @SpringBootTest
+@ActiveProfiles("test")//busca application-"test"//corrigir config
+@DataJpaTest//usa commmit e rollback
 @RunWith(SpringRunner.class)
 public class UsuarioServiceTest {
 
