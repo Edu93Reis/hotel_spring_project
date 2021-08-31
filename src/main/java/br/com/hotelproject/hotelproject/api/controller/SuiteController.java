@@ -4,6 +4,7 @@ import java.security.Provider.Service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -93,9 +94,17 @@ public class SuiteController {
 		return suite;
 	}
 	
-//	Suite atualizarSuite(Suite suite);
-//	void deletarSuite(Suite suite);
-//	void atualizarStatusSuite(Suite suite, StatusQuarto status);
+	@DeleteMapping("{id}")
+	public ResponseEntity deletar( @PathVariable("id") Long id ) {
+		return suiteService.obterPorId(id).map( entity -> {
+				suiteService.deletarSuite(entity);
+				return new ResponseEntity( HttpStatus.NO_CONTENT );
+			}).orElseGet( () ->
+						new ResponseEntity("Suite não cadastrada", HttpStatus.BAD_REQUEST));
+	}
+	
+	
+	
 //	Optional<Suite> obterPorId(Long id);
 	
 }
