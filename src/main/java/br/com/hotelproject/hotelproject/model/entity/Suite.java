@@ -38,6 +38,38 @@ public class Suite {
 		this.statusQuarto = statusQuarto;
 		this.email = email;
 	}
+	
+	public Long getIdSuite() {
+		return idSuite;
+	}
+
+	public void setIdSuite(Long idSuite) {
+		this.idSuite = idSuite;
+	}
+
+	public String getNomeSuite() {
+		return nomeSuite;
+	}
+
+	public void setNomeSuite(String nomeSuite) {
+		this.nomeSuite = nomeSuite;
+	}
+
+	public StatusQuarto getStatusQuarto() {
+		return statusQuarto;
+	}
+
+	public void setStatusQuarto(StatusQuarto statusQuarto) {
+		this.statusQuarto = statusQuarto;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@Override
 	public String toString() {
