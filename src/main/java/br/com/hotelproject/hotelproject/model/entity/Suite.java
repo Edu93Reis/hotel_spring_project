@@ -12,9 +12,11 @@ import javax.persistence.Table;
 import br.com.hotelproject.hotelproject.model.enums.StatusQuarto;
 
 @Entity
-//@Table(name = "Suite", schema="hotel")
+@Table(name = "Suite")//, schema="hotel")
 public class Suite {
 
+	private Suite suite;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idSuite;
@@ -115,6 +117,14 @@ public class Suite {
 		if (statusQuarto != other.statusQuarto)
 			return false;
 		return true;
+	}
+
+	public void setSuite(Suite suite) {
+		this.suite = suite;
+	}
+	
+	public Suite getSuite() {
+		return suite;
 	}
 	
 }

@@ -1,15 +1,18 @@
 package br.com.hotelproject.hotelproject.api.controller;
 
-import java.security.Provider.Service;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hotelproject.hotelproject.api.dto.AtualizaStatusDTO;
@@ -103,6 +106,31 @@ public class SuiteController {
 						new ResponseEntity("Suite não cadastrada", HttpStatus.BAD_REQUEST));
 	}
 	
+	@GetMapping
+	public ResponseEntity buscar(
+			@RequestParam(value="idSuite") Long idSuite,
+			@RequestParam(value="nomeSuite") String nomeSuite,
+			@RequestParam(value="email", required = false) String email,
+			@RequestParam(value="statusQuarto") StatusQuarto statusQuarto) {
+		Suite suiteFiltro = new Suite();
+		
+		suiteFiltro.setEmail(email);
+		suiteFiltro.setNomeSuite(nomeSuite);
+		suiteFiltro.setStatusQuarto(statusQuarto);
+		
+		Optional<Suite> suiteRetorno = suiteService.obterPorId(idSuite);
+		
+		if(suiteRetorno.isPresent()) {
+			return ResponseEntity.badRequest().body("Suíte não encontrada. Suíte não encontrada para o id relacionado.");
+		}else {
+			suiteFiltro.setSuite(suiteRetorno.get());
+		}
+		
+		List<Suite> suite = suiteService.buscar(suiteFiltro);
+		
+		return ResponseEntity.ok(suite);
+		
+	}
 	
 	
 //	Optional<Suite> obterPorId(Long id);

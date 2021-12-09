@@ -1,5 +1,6 @@
 package br.com.hotelproject.hotelproject.model.service.impl;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -53,6 +54,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 			throw new EmailJaCadastradoException("Usuário já cadastrado para este e-mail!");
 		}
 		
+	}
+
+	@Override
+	@Transactional
+	public Optional<Usuario> obterPorId(Long id) {
+		return usuarioRepository.findById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public void deletar(Usuario usuario) {
+		Objects.requireNonNull(usuario.getIdUsuario());
+		usuarioRepository.delete(usuario);
 	}
 
 }

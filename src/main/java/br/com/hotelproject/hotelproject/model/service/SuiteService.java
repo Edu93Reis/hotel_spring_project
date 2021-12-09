@@ -1,5 +1,6 @@
 package br.com.hotelproject.hotelproject.model.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import br.com.hotelproject.hotelproject.model.entity.Suite;
@@ -13,5 +14,6 @@ public interface SuiteService {
 	void deletarSuite(Suite suite);
 	void atualizarStatusSuite(Suite suite, StatusQuarto status);
 	Optional<Suite> obterPorId(Long id);
+	List<Suite> buscar(Suite suiteFiltro);
 	
 }

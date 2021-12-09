@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 @Entity
-//@Table(name="Hospedagem",schema="hotel")
+@Table(name="Hospedagem")//,schema="hotel")
 public class Hospedagem {
 
 	@Id

@@ -8,7 +8,8 @@ public interface HospedagemService {
 	
 	Hospedagem cadastraHospedagem(Hospedagem hospedagem);
 	void deletaHospedagem(Hospedagem hospedagem);
-	Hospedagem atualizaHospedagem(Hospedagem hospedagem);
+	void atualizaHospedagem(Hospedagem hospedagem);
 	Optional<Hospedagem> obterPorId(Long id);
+	Hospedagem atualizar(Hospedagem hospedagem);
 
 }
